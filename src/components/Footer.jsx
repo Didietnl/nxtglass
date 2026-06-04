@@ -1,4 +1,5 @@
 import styles from './Footer.module.css'
+import NXTGlassLogo from './NXTGlassLogo'
 
 export default function Footer() {
   return (
@@ -10,11 +11,7 @@ export default function Footer() {
         {/* Brand */}
         <div className={styles.brand}>
           <a href="#" className={styles.logo}>
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="15" stroke="#4ade80" strokeWidth="1.5" fill="none"/>
-              <path d="M10 8 C10 8 8 14 10 18 C12 22 16 24 16 24 C16 24 20 22 22 18 C24 14 22 8 22 8 Z" stroke="white" strokeWidth="1.5" fill="none"/>
-              <path d="M13 8 L19 8 L20 12 L16 14 L12 12 Z" fill="rgba(74,222,128,0.15)" stroke="#4ade80" strokeWidth="1"/>
-            </svg>
+            <NXTGlassLogo size={36} />
             <span className={styles.logoText}>
               <span className={styles.nxt}>NXT</span>Glass
             </span>
