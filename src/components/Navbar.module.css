@@ -1,129 +1,89 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 1.25rem 0;
-  transition: all 0.4s ease;
+.bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  padding: 1.1rem 0;
+  transition: background 0.4s ease, padding 0.3s ease, backdrop-filter 0.4s;
 }
 
-.header.scrolled {
-  background: rgba(8, 14, 26, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 0.875rem 0;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+.solid {
+  background: rgba(6,9,15,0.88);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+  padding: 0.75rem 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
 }
 
 .inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  max-width: 1240px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; gap: 2rem;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-shrink: 0;
-}
+/* Logo */
+.logo { display: flex; align-items: center; gap: 0.55rem; flex-shrink: 0; }
 
-.logoText {
+.wordmark {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: white;
-  letter-spacing: -0.02em;
+  font-weight: 700; font-size: 1.25rem;
+  color: white; letter-spacing: -0.02em;
 }
+.wordmark em { color: #3ddc84; font-style: normal; }
 
-.logoNXT {
-  color: #4ade80;
-}
-
+/* Nav */
 .nav {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  display: flex; align-items: center; gap: 0.1rem;
   margin: 0 auto;
 }
 
-.navLink {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.7);
-  padding: 0.4rem 0.75rem;
+.link {
+  font-size: 0.82rem; font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  padding: 0.35rem 0.8rem;
   border-radius: 6px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
 }
+.link:hover { color: white; background: rgba(255,255,255,0.055); }
 
-.navLink:hover {
-  color: white;
-  background: rgba(255,255,255,0.06);
+/* CTA */
+.cta { flex-shrink: 0; }
+
+/* Burger */
+.burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 4px; margin-left: auto;
 }
-
-.cta {
-  flex-shrink: 0;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  padding: 4px;
-  margin-left: auto;
-}
-
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: white;
-  border-radius: 2px;
+.burger span {
+  display: block; width: 22px; height: 2px;
+  background: rgba(255,255,255,0.8); border-radius: 2px;
   transition: all 0.3s ease;
 }
+.x1 { transform: rotate(45deg) translate(5px, 5px); }
+.x2 { opacity: 0; }
+.x3 { transform: rotate(-45deg) translate(5px, -5px); }
 
-.mobileMenu {
-  padding: 1.25rem 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  background: rgba(8,14,26,0.97);
-  border-top: 1px solid rgba(255,255,255,0.06);
+/* Drawer */
+.drawer {
+  padding: 1rem 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.2rem;
+  background: rgba(6,9,15,0.97);
+  border-top: 1px solid rgba(255,255,255,0.055);
 }
-
-.mobileLink {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.75);
+.dlink {
+  font-size: 0.95rem; color: rgba(255,255,255,0.7);
   padding: 0.65rem 0.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.045);
   transition: color 0.2s;
 }
+.dlink:hover { color: white; }
+.dCta { margin-top: 0.75rem; justify-content: center; }
 
-.mobileLink:hover {
-  color: white;
-}
-
-.mobileCta {
-  margin-top: 0.75rem;
-  text-align: center;
-  justify-content: center;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .nav { display: none; }
   .cta { display: none; }
-  .hamburger { display: flex; }
+  .burger { display: flex; }
 }
-
 @media (max-width: 768px) {
   .inner { padding: 0 1.25rem; }
+  .drawer { padding: 1rem 1.25rem 1.5rem; }
 }

@@ -1,148 +1,103 @@
 import { useEffect, useRef } from 'react'
-import styles from './Products.module.css'
+import s from './Products.module.css'
 
+// Real Unsplash product photography for each category
 const products = [
   {
-    id: 'reusable-cups',
+    id: 'cups',
+    img: 'https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?w=600&q=80&auto=format',
     tag: 'Bestseller',
+    tagColor: '#3ddc84',
     title: 'Reusable Cups',
-    desc: 'Festival cups, bierbekers en hardcups. Ideaal voor events, festivals en stadions.',
+    models: 'Cervecium · Ionic · Custom Print',
+    copy: 'Van festival cup tot full-colour bedrukt bierbekers. Bedrukbaar met jouw logo, onbreekbaar en 100% herbruikbaar.',
     cta: 'Bekijk brochure',
-    accent: '#4ade80',
-    visual: <CupVisual />,
+    accent: '#3ddc84',
   },
   {
-    id: 'wijnglazen',
+    id: 'wijn',
+    img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80&auto=format',
+    tag: 'Premium',
+    tagColor: '#a78bfa',
     title: 'Wijnglazen',
-    desc: 'Stijlvolle kunststof wijnglazen voor rood, wit, rosé en mousserende wijnen.',
-    cta: 'Bekijk types',
-    accent: '#818cf8',
-    visual: <WineVisual />,
+    models: 'Satenne · Appellen · Tulip · Mars',
+    copy: 'Glashelder, elegante silhouetten — niet te onderscheiden van kristal. Voor rood, wit, rosé en mousserende wijnen.',
+    cta: 'Bekijk collectie',
+    accent: '#a78bfa',
   },
   {
     id: 'cocktail',
+    img: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80&auto=format',
+    tag: 'Nieuw',
+    tagColor: '#f472b6',
     title: 'Cocktail & Spirits',
-    desc: 'Voor cocktails, gin-tonic, longdrinks en sterke dranken. Elegant en onbreekbaar.',
-    cta: 'Bekijk collectie',
+    models: 'Jupiter · Hermes · Bottlecut · Gaetan',
+    copy: 'Slanke martini, retro coupe of geslepen tumbler. Voor cocktailbars, events en premium alcoholconcepten.',
+    cta: 'Bekijk types',
     accent: '#f472b6',
-    visual: <CocktailVisual />,
   },
   {
     id: 'horeca',
+    img: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80&auto=format',
+    tag: 'Pro',
+    tagColor: '#fb923c',
     title: 'Horeca Glazen',
-    desc: 'Complete lijn van professionele glazen voor restaurants, bars en hotels.',
+    models: 'Chope · Woodrose · Venus · Ionic · Optik',
+    copy: 'Complete professionele lijn. Stapelbaar, industrieel vaatwasbestendig en gebouwd voor intensief horecagebruik.',
     cta: 'Bekijk assortiment',
     accent: '#fb923c',
-    visual: <HorecaVisual />,
   },
 ]
 
-function CupVisual() {
-  return (
-    <svg width="120" height="140" viewBox="0 0 80 100" fill="none">
-      <path d="M15 15 L12 80 L68 80 L65 15 Z" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.3)" strokeWidth="1"/>
-      <path d="M15 15 L65 15" stroke="rgba(74,222,128,0.5)" strokeWidth="1.5"/>
-      <path d="M12 80 L68 80" stroke="rgba(74,222,128,0.2)" strokeWidth="1"/>
-      <path d="M20 55 L60 55 L63 80 L17 80 Z" fill="rgba(74,222,128,0.12)"/>
-      <path d="M18 20 L16 60" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeLinecap="round"/>
-      <text x="30" y="42" fill="rgba(74,222,128,0.4)" fontSize="8" fontFamily="sans-serif">NXT</text>
-    </svg>
-  )
-}
-
-function WineVisual() {
-  return (
-    <svg width="100" height="160" viewBox="0 0 60 100" fill="none">
-      <path d="M15 8 Q8 35 12 52 Q16 68 30 72 Q44 68 48 52 Q52 35 45 8 Z" fill="rgba(129,140,248,0.08)" stroke="rgba(129,140,248,0.3)" strokeWidth="1"/>
-      <line x1="30" y1="72" x2="30" y2="90" stroke="rgba(129,140,248,0.3)" strokeWidth="1.5"/>
-      <ellipse cx="30" cy="92" rx="12" ry="3" fill="rgba(129,140,248,0.1)" stroke="rgba(129,140,248,0.2)" strokeWidth="1"/>
-      <path d="M18 44 Q17 54 19 60 Q24 70 30 71" fill="none" stroke="rgba(129,140,248,0.2)" strokeWidth="1"/>
-      <path d="M17 10 Q19 7 30 7" stroke="rgba(255,255,255,0.35)" strokeWidth="1" fill="none"/>
-      <path d="M20 14 L17 40" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  )
-}
-
-function CocktailVisual() {
-  return (
-    <svg width="110" height="140" viewBox="0 0 70 100" fill="none">
-      <path d="M8 12 L35 52 L62 12 Z" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" strokeWidth="1"/>
-      <line x1="35" y1="52" x2="35" y2="80" stroke="rgba(244,114,182,0.3)" strokeWidth="1.5"/>
-      <ellipse cx="35" cy="82" rx="12" ry="3" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.2)" strokeWidth="1"/>
-      <path d="M8 12 L62 12" stroke="rgba(244,114,182,0.4)" strokeWidth="1.2"/>
-      <path d="M18 32 L35 52 L52 32 Z" fill="rgba(244,114,182,0.12)"/>
-      {/* Garnish stick */}
-      <line x1="50" y1="8" x2="28" y2="22" stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeDasharray="2 1"/>
-      <circle cx="52" cy="7" r="3" fill="rgba(244,114,182,0.4)"/>
-    </svg>
-  )
-}
-
-function HorecaVisual() {
-  return (
-    <svg width="130" height="130" viewBox="0 0 90 90" fill="none">
-      {/* Three glasses of different heights */}
-      <path d="M10 20 L8 65 L28 65 L26 20 Z" fill="rgba(251,146,60,0.08)" stroke="rgba(251,146,60,0.3)" strokeWidth="1"/>
-      <path d="M35 28 L33 65 L53 65 L51 28 Z" fill="rgba(251,146,60,0.08)" stroke="rgba(251,146,60,0.3)" strokeWidth="1"/>
-      <path d="M60 15 L58 65 L78 65 L76 15 Z" fill="rgba(251,146,60,0.08)" stroke="rgba(251,146,60,0.25)" strokeWidth="1"/>
-      <line x1="8" y1="65" x2="78" y2="65" stroke="rgba(251,146,60,0.2)" strokeWidth="1"/>
-      <path d="M12 42 L26 42 L27 65 L11 65 Z" fill="rgba(251,146,60,0.1)"/>
-      <path d="M37 48 L51 48 L52 65 L36 65 Z" fill="rgba(251,146,60,0.1)"/>
-      <path d="M62 38 L76 38 L77 65 L61 65 Z" fill="rgba(251,146,60,0.12)"/>
-    </svg>
-  )
+function useReveal(threshold = 0.1) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add(s.show) }, { threshold })
+    obs.observe(el); return () => obs.disconnect()
+  }, [])
+  return ref
 }
 
 export default function Products() {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add(styles.visible)
-          // also animate the grid cards
-          el.closest('section')?.querySelector(`.${styles.grid}`)?.classList.add(styles.visible)
-        }
-      },
-      { threshold: 0.1 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+  const hRef = useReveal(0.1)
+  const gRef = useReveal(0.08)
 
   return (
-    <section className={styles.products} id="assortiment">
+    <section className={s.sec} id="assortiment">
       <div className="container">
-        <div className={styles.header} ref={ref} id="header-products">
-          <span className="section-label">Ons assortiment</span>
-          <h2 className={styles.title}>Voor elke gelegenheid<br />een passend glas.</h2>
-          <a href="#brochures" className={styles.viewAll}>
-            Bekijk alle producten <span>→</span>
-          </a>
+        {/* Header */}
+        <div className={`${s.hdr} reveal`} ref={hRef}>
+          <div>
+            <p className="label">Ons assortiment</p>
+            <h2 className={s.h2}>Voor elke gelegenheid<br/>een passend glas.</h2>
+          </div>
+          <a href="#brochures" className={s.all}>Bekijk alle producten →</a>
         </div>
 
-        <div className={styles.grid}>
+        {/* Cards */}
+        <div className={s.grid} ref={gRef}>
           {products.map((p, i) => (
-            <div
-              key={p.id}
-              className={styles.card}
-              style={{ '--accent': p.accent, '--i': i }}
-            >
-              {p.tag && <span className={styles.cardTag}>{p.tag}</span>}
-
-              <div className={styles.cardVisual}>
-                <div className={styles.cardGlow} />
-                <div className={styles.visualWrap}>{p.visual}</div>
+            <div key={p.id} className={s.card} style={{ '--i': i }}>
+              {/* Photo background */}
+              <div className={s.photo}>
+                <img src={p.img} alt={p.title} className={s.img} loading="lazy"/>
+                <div className={s.photoOverlay}/>
+                <div className={s.photoGrad} style={{ '--c': p.accent }}/>
               </div>
 
-              <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{p.title}</h3>
-                <p className={styles.cardDesc}>{p.desc}</p>
-                <a href="#brochures" className={styles.cardCta}>
-                  {p.cta} <span>→</span>
+              {/* Tag */}
+              <span className={s.tag} style={{ color: p.tagColor, borderColor: `${p.tagColor}44` }}>
+                {p.tag}
+              </span>
+
+              {/* Content */}
+              <div className={s.body}>
+                <p className={s.models} style={{ color: p.accent }}>{p.models}</p>
+                <h3 className={s.title}>{p.title}</h3>
+                <p className={s.copy}>{p.copy}</p>
+                <a href="#brochures" className={s.cta} style={{ color: p.accent }}>
+                  {p.cta} →
                 </a>
               </div>
             </div>

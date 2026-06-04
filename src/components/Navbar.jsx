@@ -1,73 +1,53 @@
 import { useState, useEffect } from 'react'
-import styles from './Navbar.module.css'
+import NXTGlassLogo from './NXTGlassLogo'
+import s from './Navbar.module.css'
 
-const navLinks = [
-  { label: 'Assortiment', href: '#assortiment' },
-  { label: 'Voor wie', href: '#voor-wie' },
-  { label: 'Duurzaamheid', href: '#eximia' },
-  { label: 'Brochures', href: '#brochures' },
-  { label: 'Over ons', href: '#over-ons' },
-  { label: 'Contact', href: '#contact' },
+const links = [
+  ['Assortiment', '#assortiment'],
+  ['Voor wie',    '#voor-wie'],
+  ['Duurzaamheid','#duurzaamheid'],
+  ['Brochures',   '#brochures'],
+  ['Over ons',    '#over-ons'],
+  ['Contact',     '#contact'],
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [open, setOpen]         = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const fn = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.inner}>
-        {/* Logo */}
-        <a href="#" className={styles.logo}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16" cy="16" r="15" stroke="#4ade80" strokeWidth="1.5" fill="none"/>
-            <path d="M10 8 C10 8 8 14 10 18 C12 22 16 24 16 24 C16 24 20 22 22 18 C24 14 22 8 22 8 Z" stroke="white" strokeWidth="1.5" fill="none"/>
-            <path d="M13 8 L19 8 L20 12 L16 14 L12 12 Z" fill="rgba(74,222,128,0.15)" stroke="#4ade80" strokeWidth="1"/>
-          </svg>
-          <span className={styles.logoText}>
-            <span className={styles.logoNXT}>NXT</span>Glass
-          </span>
+    <header className={`${s.bar} ${scrolled ? s.solid : ''}`}>
+      <div className={s.inner}>
+        <a href="#" className={s.logo}>
+          <NXTGlassLogo size={36} />
+          <span className={s.wordmark}><em>NXT</em>Glass</span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className={styles.nav}>
-          {navLinks.map(link => (
-            <a key={link.href} href={link.href} className={styles.navLink}>{link.label}</a>
-          ))}
+        <nav className={s.nav}>
+          {links.map(([l, h]) => <a key={h} href={h} className={s.link}>{l}</a>)}
         </nav>
 
-        {/* CTA */}
-        <div className={styles.cta}>
-          <a href="#contact" className="btn-primary">
-            Offerte aanvragen <span>→</span>
-          </a>
-        </div>
+        <a href="#contact" className={`btn-green ${s.cta}`}>
+          Offerte aanvragen →
+        </a>
 
-        {/* Hamburger */}
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          <span /><span /><span />
+        <button className={s.burger} onClick={() => setOpen(!open)} aria-label="Menu">
+          <span className={open ? s.x1 : ''}/><span className={open ? s.x2 : ''}/><span className={open ? s.x3 : ''}/>
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className={styles.mobileMenu}>
-          {navLinks.map(link => (
-            <a key={link.href} href={link.href} className={styles.mobileLink} onClick={() => setMenuOpen(false)}>
-              {link.label}
-            </a>
+      {open && (
+        <div className={s.drawer}>
+          {links.map(([l, h]) => (
+            <a key={h} href={h} className={s.dlink} onClick={() => setOpen(false)}>{l}</a>
           ))}
-          <a href="#contact" className={`btn-primary ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>
+          <a href="#contact" className={`btn-green ${s.dCta}`} onClick={() => setOpen(false)}>
             Offerte aanvragen →
           </a>
         </div>
